@@ -1,12 +1,25 @@
-import logo from '../logo.svg';
-import '../App.css';
+import { connect } from "react-redux";
+import React, { Component } from "react";
+// import logo from '../logo.svg';
+// import '../App.css';
 
-function App() {
-  return (
-    <div className="App">
-      App
-    </div>
-  );
+class App extends Component {
+  render() {
+    let { posts } = this.props;
+    console.log("posts", posts);
+    return (
+      <div>hello</div>
+      // <div>
+      // </div>
+      // {<div>hii</div>}
+    );
+  }
 }
 
-export default App;
+function mapStatetoProps(state) {
+  return {
+    posts: state.posts,
+  };
+}
+
+export default connect(mapStatetoProps)(App);
