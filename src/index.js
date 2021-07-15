@@ -4,6 +4,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
 
 import finalStore from "./store";
 
@@ -13,7 +14,9 @@ console.log(store.getState());
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")
@@ -23,3 +26,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// import { BrowserRouter } from "react-router-dom";
