@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { fetchPosts } from "../actions/posts";
+import {Postlist} from "./";
 // import logo from '../logo.svg';
 // import '../App.css';
 
@@ -12,10 +13,7 @@ class App extends Component {
     let { posts } = this.props;
     console.log("posts", posts);
     return (
-      <div>hello</div>
-      // <div>
-      // </div>
-      // {<div>hii</div>}
+      <Postlist posts={posts}/>
     );
   }
 }
