@@ -37,11 +37,12 @@ class Login extends Component {
   };
   render() {
     const { error, inprogress } = this.props.auth;
+    // console.log(error)
     return (
       <div>
         <form className="login-form">
-          {error && <div className="alert error-dailog">{error}</div>}
           <span className="login-signup-header">Log In</span>
+          {error && <div className="alert error-dailog">{error}</div>}
           <div className="field">
             <input
               type="email"
@@ -59,6 +60,7 @@ class Login extends Component {
             />
           </div>
           <div className="field">
+            {console.log(inprogress)}
             {inprogress ? (
               <button onClick={this.clickDone} disabled={inprogress}>
                 Logging in...
