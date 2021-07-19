@@ -5,6 +5,9 @@ import propTypes from "prop-types";
 export default class Postlist extends Component {
   render() {
     const { posts } = this.props;
+    if(posts.length===0){
+      return <h2 className="login-form">Loading...</h2>
+    }
     return (
       <div className="home">
         <div className="posts-list">
