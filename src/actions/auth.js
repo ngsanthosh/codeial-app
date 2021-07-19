@@ -1,6 +1,13 @@
 import { APIurls } from "../pleasehelpme/urls";
 import { getFormBody } from "../pleasehelpme/utils";
-import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, SIGNUP_FAILED, SIGNUP_START, SIGNUP_SUCCESS } from "./actionTypes";
+import {
+  LOGIN_FAILURE,
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  SIGNUP_FAILED,
+  SIGNUP_START,
+  SIGNUP_SUCCESS,
+} from "./actionTypes";
 
 export function startlogin() {
   return {
@@ -39,6 +46,7 @@ export function login(email, password) {
         console.log(data);
         //   dispatch()
         if (data.success) {
+          localStorage.setItem("token",data.data.token);
           dispatch(loginsuccess(data.data.user));
           return;
         }
@@ -69,7 +77,7 @@ export function signupfailed(error) {
 
 export function signup(email, name, password, confirm_password) {
   return (dispatch) => {
-      dispatch(startsignup());
+    dispatch(startsignup());
     const urll = APIurls.signup();
 
     fetch(urll, {

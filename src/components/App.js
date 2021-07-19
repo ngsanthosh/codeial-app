@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
 import React, { Component } from "react";
+import jwtDecode from "jwt-decode";
+
 import { fetchPosts } from "../actions/posts";
-import { Postlist, Navbar, Home, Wrongpath,Login , Signup} from "./";
+import { Postlist, Navbar, Home, Wrongpath, Login, Signup } from "./";
 import propTypes from "prop-types";
 
 // import logo from '../logo.svg';
@@ -11,6 +13,14 @@ import propTypes from "prop-types";
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const user = jwtDecode(token);
+
+      console.log(user, "from jwt");
+    }
   }
 
   render() {
@@ -30,21 +40,20 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-      
-          {/* <Postlist posts={posts} /> */}
-          <Switch>
-            <Route
-              path="/"
-              exact={true}
-              render={(props) => {
-                return <Home {...props} posts={posts} />;
-              }}
-            />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route component={Wrongpath} />
-          </Switch>
-        
+
+        {/* <Postlist posts={posts} /> */}
+        <Switch>
+          <Route
+            path="/"
+            exact={true}
+            render={(props) => {
+              return <Home {...props} posts={posts} />;
+            }}
+          />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route component={Wrongpath} />
+        </Switch>
       </div>
     );
   }

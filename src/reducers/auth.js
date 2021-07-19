@@ -28,7 +28,7 @@ export default function auth(state = initialAuthState, action) {
       return {
         ...state,
         user: action.user,
-        isLoggedin: true,
+        isloggedin: true,
         inprogress: false,
         error: null,
       };
