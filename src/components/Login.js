@@ -60,7 +60,7 @@ class Login extends Component {
             />
           </div>
           <div className="field">
-            {console.log(inprogress)}
+            {/* {console.log(inprogress)} */}
             {inprogress ? (
               <button onClick={this.clickDone} disabled={inprogress}>
                 Logging in...

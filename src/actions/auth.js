@@ -1,9 +1,11 @@
 import { APIurls } from "../pleasehelpme/urls";
 import { getFormBody } from "../pleasehelpme/utils";
 import {
+  AUTHENTICATE_USER,
   LOGIN_FAILURE,
   LOGIN_START,
   LOGIN_SUCCESS,
+  LOG_OUT,
   SIGNUP_FAILED,
   SIGNUP_START,
   SIGNUP_SUCCESS,
@@ -46,7 +48,7 @@ export function login(email, password) {
         console.log(data);
         //   dispatch()
         if (data.success) {
-          localStorage.setItem("token",data.data.token);
+          localStorage.setItem("token", data.data.token);
           dispatch(loginsuccess(data.data.user));
           return;
         }
@@ -98,5 +100,18 @@ export function signup(email, name, password, confirm_password) {
         //   }
         //   dispatch(loginfailed(data.message));
       });
+  };
+}
+
+export function authenticate(user) {
+  return {
+    type: AUTHENTICATE_USER,
+    user,
+  };
+}
+
+export function logout() {
+  return {
+    type: LOG_OUT,
   };
 }

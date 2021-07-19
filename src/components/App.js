@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import { fetchPosts } from "../actions/posts";
 import { Postlist, Navbar, Home, Wrongpath, Login, Signup } from "./";
 import propTypes from "prop-types";
+import { authenticate } from "../actions/auth";
 
 // import logo from '../logo.svg';
 // import '../App.css';
@@ -20,6 +21,7 @@ class App extends Component {
       const user = jwtDecode(token);
 
       console.log(user, "from jwt");
+      this.props.dispatch(authenticate(user))
     }
   }
 
