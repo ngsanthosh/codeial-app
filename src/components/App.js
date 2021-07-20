@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Redirect, Route, Switch } from "react-router-dom";
 import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
 
@@ -11,6 +11,19 @@ import { authenticate } from "../actions/auth";
 // import logo from '../logo.svg';
 // import '../App.css';
 
+const Settings = () => <div>Settings Page</div>;
+const PrivateRoute = ({ path, component: Component, isloggedin }) => {
+  // const  = PRprops;
+  return (
+    <Route
+      path
+      render={(props) => {
+        return isloggedin ? <Component {...props} /> : <Redirect to="/login" />;
+      }}
+    />
+  );
+};
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
@@ -21,7 +34,7 @@ class App extends Component {
       const user = jwtDecode(token);
 
       console.log(user, "from jwt");
-      this.props.dispatch(authenticate(user))
+      this.props.dispatch(authenticate(user));
     }
   }
 
@@ -37,7 +50,7 @@ class App extends Component {
     // const Signup = () => {
     //   return <div>Signup component</div>;
     // };
-    let { posts } = this.props;
+    let { posts, auth } = this.props;
     console.log("posts", posts);
     return (
       <div>
@@ -54,6 +67,11 @@ class App extends Component {
           />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <PrivateRoute
+            path="/settings"
+            component={Settings}
+            isloggedin={auth.isloggedin}
+          />
           <Route component={Wrongpath} />
         </Switch>
       </div>
@@ -68,6 +86,7 @@ App.propTypes = {
 function mapStatetoProps(state) {
   return {
     posts: state.posts,
+    auth: state.auth,
   };
 }
 
