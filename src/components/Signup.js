@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { signup,clearerror } from "../actions/auth";
+import { signup, clearerror, startsignup } from "../actions/auth";
 
 class Signup extends Component {
   constructor(props) {
@@ -28,20 +28,21 @@ class Signup extends Component {
     const { email, password, confirmPassword, name } = this.state;
 
     if (email && password && confirmPassword && name) {
-      // this.props.dispatch(startSingup());
+      this.props.dispatch(startsignup());
       this.props.dispatch(signup(email, name, password, confirmPassword));
     }
   };
 
   render() {
-    const { inProgress, error, isloggedin } = this.props.auth;
+    const { inProgress, error, isloggedin, message } = this.props.auth;
+    // console.log(message);
     if (isloggedin) {
       return <Redirect to="/" />;
     }
     return (
       <form className="login-form">
         <span className="login-signup-header"> Signup</span>
-        {error && <div className="alert error-dailog">{error}</div>}
+        {message && <div className="alert error-dailog">{message}</div>}
         <div className="field">
           <input
             placeholder="Name"

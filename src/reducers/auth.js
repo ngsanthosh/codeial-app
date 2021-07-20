@@ -36,11 +36,17 @@ export default function auth(state = initialAuthState, action) {
         error: null,
       };
     case LOGIN_FAILURE:
-    case SIGNUP_FAILED:
       return {
         ...state,
         inprogress: false,
         error: action.error,
+      };
+
+    case SIGNUP_FAILED:
+      return {
+        ...state,
+        inprogress: false,
+        message: action.message,
       };
 
     case AUTHENTICATE_USER:

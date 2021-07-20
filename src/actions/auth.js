@@ -71,10 +71,10 @@ export function signupsuccess(user) {
   };
 }
 
-export function signupfailed(error) {
+export function signupfailed(message) {
   return {
     type: SIGNUP_FAILED,
-    error,
+    message,
   };
 }
 
@@ -93,13 +93,15 @@ export function signup(email, name, password, confirm_password) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //   {
-        //   dispatch()
-        //   if (data.success) {
-        //     dispatch(loginsuccess(data.data.user));
-        // return;
-        //     }
-        //     dispatch(loginfailed(data.message));
+        {
+          // dispatch()
+          if (data.success) {
+            dispatch(signupsuccess(data.data.user));
+            return;
+          }
+          console.log(data.message)
+          dispatch(signupfailed(data.message));
+        }
         // });
         // };
       });
