@@ -4,14 +4,14 @@ import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
 
 import { fetchPosts } from "../actions/posts";
-import { Postlist, Navbar, Home, Wrongpath, Login, Signup } from "./";
+import { Postlist, Navbar, Home, Wrongpath, Login, Signup, Settings } from "./";
 import propTypes from "prop-types";
 import { authenticate } from "../actions/auth";
 
 // import logo from '../logo.svg';
 // import '../App.css';
 
-const Settings = () => <div>Settings Page</div>;
+// const Settings = () => <div>Settings Page</div>;
 const PrivateRoute = ({ path, component: Component, isloggedin }) => {
   // const  = PRprops;
   return (
