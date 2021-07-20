@@ -41,10 +41,11 @@ class Login extends Component {
   };
   render() {
     const { error, inprogress, isloggedin } = this.props.auth;
+    const { from }=this.props.location.state || { from :{pathname:"/"} }
     // console.log(error)
     if(isloggedin)
     {
-      return <Redirect to="/" />     
+      return <Redirect to={from} />     
     }
     return(
       <div>
