@@ -28,13 +28,13 @@ class Signup extends Component {
     const { email, password, confirmPassword, name } = this.state;
 
     if (email && password && confirmPassword && name) {
-      this.props.dispatch(startsignup());
+      // this.props.dispatch(startsignup());
       this.props.dispatch(signup(email, name, password, confirmPassword));
     }
   };
 
   render() {
-    const { inProgress, error, isloggedin, message } = this.props.auth;
+    const { inprogress, isloggedin, message } = this.props.auth;
     // console.log(message);
     if (isloggedin) {
       return <Redirect to="/" />;
@@ -78,9 +78,13 @@ class Signup extends Component {
           />
         </div>
         <div className="field">
-          <button onClick={this.onFormSubmit} disabled={inProgress}>
-            Signup
-          </button>
+          {inprogress ? (
+            <button className="no-cursor" onClick={this.onFormSubmit} disabled={inprogress}>
+              Signing up...
+            </button>
+          ) : (
+            <button onClick={this.onFormSubmit}>Signup</button>
+          )}
         </div>
       </form>
     );

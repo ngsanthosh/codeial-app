@@ -66,6 +66,7 @@ export default function auth(state = initialAuthState, action) {
       return {
         ...state,
         error: null,
+        message: null
       };
     default:
       return state;
