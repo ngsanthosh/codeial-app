@@ -2,6 +2,7 @@ import { APIurls } from "../pleasehelpme/urls";
 import { getFormBody } from "../pleasehelpme/utils";
 import {
   AUTHENTICATE_USER,
+  CLEAR_ERRORRR,
   LOGIN_FAILURE,
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -93,12 +94,14 @@ export function signup(email, name, password, confirm_password) {
       .then((data) => {
         console.log(data);
         //   {
-        //   //   dispatch()
-        // //   if (data.success) {
-        // //     dispatch(loginsuccess(data.data.user));
-        //     // return;
-        //   }
-        //   dispatch(loginfailed(data.message));
+        //   dispatch()
+        //   if (data.success) {
+        //     dispatch(loginsuccess(data.data.user));
+        // return;
+        //     }
+        //     dispatch(loginfailed(data.message));
+        // });
+        // };
       });
   };
 }
@@ -113,5 +116,10 @@ export function authenticate(user) {
 export function logout() {
   return {
     type: LOG_OUT,
+  };
+}
+export function clearerror() {
+  return {
+    type: CLEAR_ERRORRR,
   };
 }

@@ -1,6 +1,7 @@
 import React, { Component, createRef } from "react";
+import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
-import { login } from "../actions/auth";
+import { login, clearerror } from "../actions/auth";
 
 class Login extends Component {
   constructor(props) {
@@ -11,6 +12,9 @@ class Login extends Component {
       username: "",
       password: "",
     };
+  }
+  componentWillUnmount() {
+    this.props.dispatch(clearerror())
   }
   // componentWillUnmount() {
   //   let { error } = this.props.auth;
@@ -36,9 +40,13 @@ class Login extends Component {
     console.log(this.state);
   };
   render() {
-    const { error, inprogress } = this.props.auth;
+    const { error, inprogress, isloggedin } = this.props.auth;
     // console.log(error)
-    return (
+    if(isloggedin)
+    {
+      return <Redirect to="/" />     
+    }
+    return(
       <div>
         <form className="login-form">
           <span className="login-signup-header">Log In</span>
