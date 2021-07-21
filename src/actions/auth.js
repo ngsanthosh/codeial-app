@@ -1,8 +1,10 @@
 import { APIurls } from "../pleasehelpme/urls";
-import { getFormBody } from "../pleasehelpme/utils";
+import { getbearertoken, getFormBody } from "../pleasehelpme/utils";
 import {
   AUTHENTICATE_USER,
   CLEAR_ERRORRR,
+  EDIT_USER_FAILED,
+  EDIT_USER_SUCCESS,
   LOGIN_FAILURE,
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -99,7 +101,7 @@ export function signup(email, name, password, confirm_password) {
             dispatch(signupsuccess(data.data.user));
             return;
           }
-          console.log(data.message)
+          console.log(data.message);
           dispatch(signupfailed(data.message));
         }
         // });
@@ -124,4 +126,43 @@ export function clearerror() {
   return {
     type: CLEAR_ERRORRR,
   };
+}
+
+export function editusersuccess(user) {
+  return {
+    type: EDIT_USER_SUCCESS,
+    user,
+  };
+}
+export function edituserfailed(error) {
+  return {
+    type: EDIT_USER_FAILED,
+    error,
+  };
+}
+export function edituser(name, password, confirmpassword, id){
+  return (dispatch) =>{
+    const url = APIurls.edituser()
+
+    fetch(url,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization":`bearer ${getbearertoken} `
+      },
+      body: getFormBody({ name, password, confirm_password:confirmpassword, id }),
+    }).then(response => response.json())
+    .then(data =>  {
+      console.log(data);
+      if(data.success){
+        dispatch(editusersuccess(data.data.user))
+        if(data.data.token){
+          localStorage.setItem("token", data.data.token)
+        }
+      }
+      else{
+        dispatch(edituserfailed(data.message))
+      }
+    })
+  }
 }

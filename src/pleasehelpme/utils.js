@@ -10,3 +10,9 @@ export function getFormBody(params) {
 
   return formBody.join("&");
 }
+
+export function getbearertoken() {
+  if (localStorage.getItem("token")) {
+    return localStorage.getItem("token");
+  }
+}
