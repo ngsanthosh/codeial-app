@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { edituser } from "../actions/auth";
+import { clearerror, edituser } from "../actions/auth";
 
 class Settings extends Component {
   constructor(props) {
@@ -10,20 +10,27 @@ class Settings extends Component {
       password: "",
       confirmPassword: "",
       editMode: false,
+      goback: false,
     };
+  }
+  componentWillUnmount() {
+    this.props.dispatch(clearerror());
+  }
+  handlegoback = () =>{
+    this.props.dispatch(clearerror())
   }
   handleChange = (prop, val) => {
     this.setState({
       [prop]: val,
     });
   };
-  handleSave = () =>{
-    const {name, password, confirmPassword }= this.state
-    const {user}=this.props.auth
-    this.props.dispatch(edituser(name, password, confirmPassword, user._id))
-  }
+  handleSave = () => {
+    const { name, password, confirmPassword } = this.state;
+    const { user } = this.props.auth;
+    this.props.dispatch(edituser(name, password, confirmPassword, user._id));
+  };
   render() {
-    const user = this.props.auth.user;
+    const { user, error } = this.props.auth;
     const { editMode } = this.state;
     return (
       <div className="settings">
@@ -33,6 +40,10 @@ class Settings extends Component {
             alt="user-dp"
           />
         </div>
+        {error && <div className="alert error-dailog">{error}</div>}
+        {error === false && (
+          <div className="alert success-dailog">Successfully Updated ✅</div>
+        )}
 
         <div className="field">
           <div className="field-label">Email</div>
@@ -44,7 +55,7 @@ class Settings extends Component {
           {editMode ? (
             <input
               type="text"
-              onChange={(e) => this.handleChange("name",e.target.value)}
+              onChange={(e) => this.handleChange("name", e.target.value)}
               value={this.state.name}
             />
           ) : (
@@ -58,7 +69,7 @@ class Settings extends Component {
 
             <input
               type="password"
-              onChange={(e) => this.handleChange("password",e.target.value)}
+              onChange={(e) => this.handleChange("password", e.target.value)}
               value={this.state.password}
             />
           </div>
@@ -70,7 +81,9 @@ class Settings extends Component {
 
             <input
               type="password"
-              onChange={(e) => this.handleChange("confirmPassword",e.target.value)}
+              onChange={(e) =>
+                this.handleChange("confirmPassword", e.target.value)
+              }
               value={this.state.confirmPassword}
             />
           </div>
@@ -78,12 +91,31 @@ class Settings extends Component {
 
         <div className="btn-grp">
           {editMode ? (
-            <button className="button save-btn" onClick={this.handleSave}>Save</button>
+            <button className="button save-btn" onClick={this.handleSave}>
+              Save
+            </button>
           ) : (
-            <button className="button edit-btn" onClick={()=>{this.handleChange("editMode",true)}}>Edit profile</button>
+            <button
+              className="button edit-btn"
+              onClick={() => {
+                this.handleChange("editMode", true);
+              }}
+            >
+              Edit profile
+            </button>
           )}
 
-          {editMode && <div className="go-back" onClick={()=>{this.handleChange("editMode",false)}}>Go back</div>}
+          {editMode && (
+            <div
+              className="go-back"
+              onClick={() => {
+                this.handlegoback();
+                this.handleChange("editMode", false);
+              }}
+            >
+              Go back
+            </div>
+          )}
         </div>
       </div>
     );
