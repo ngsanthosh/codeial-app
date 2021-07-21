@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default class Postlist extends Component {
   render() {
     const { posts } = this.props;
-    if(posts.length===0){
-      return <h2 className="login-form">Loading...</h2>
+    if (posts.length === 0) {
+      return <h2 className="login-form">Loading...</h2>;
     }
     return (
       <div className="home">
@@ -15,10 +16,12 @@ export default class Postlist extends Component {
             <div className="post-wrapper" key={post._id}>
               <div className="post-header">
                 <div className="post-avatar">
-                  <img
-                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                    alt="user-pic"
-                  />
+                  <Link to={`/user/${post.user._id}`}>
+                    <img
+                      src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                      alt="user-pic"
+                    />
+                  </Link>
                   <div>
                     <span className="post-author">{post.user.name}</span>
                     <span className="post-time">a minute ago</span>
