@@ -15,4 +15,7 @@ export function getbearertoken() {
   if (localStorage.getItem("token")) {
     return localStorage.getItem("token");
   }
+  else{
+    return null
+  }
 }

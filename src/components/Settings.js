@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { edituser } from "../actions/auth";
 
 class Settings extends Component {
   constructor(props) {
@@ -16,6 +17,11 @@ class Settings extends Component {
       [prop]: val,
     });
   };
+  handleSave = () =>{
+    const {name, password, confirmPassword }= this.state
+    const {user}=this.props.auth
+    this.props.dispatch(edituser(name, password, confirmPassword, user._id))
+  }
   render() {
     const user = this.props.auth.user;
     const { editMode } = this.state;
@@ -72,7 +78,7 @@ class Settings extends Component {
 
         <div className="btn-grp">
           {editMode ? (
-            <button className="button save-btn">Save</button>
+            <button className="button save-btn" onClick={this.handleSave}>Save</button>
           ) : (
             <button className="button edit-btn" onClick={()=>{this.handleChange("editMode",true)}}>Edit profile</button>
           )}

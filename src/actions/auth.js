@@ -148,7 +148,7 @@ export function edituser(name, password, confirmpassword, id){
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization":`bearer ${getbearertoken} `
+        "Authorization":`bearer ${getbearertoken()} `
       },
       body: getFormBody({ name, password, confirm_password:confirmpassword, id }),
     }).then(response => response.json())
