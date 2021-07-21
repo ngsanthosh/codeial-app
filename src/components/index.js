@@ -6,5 +6,16 @@ import Wrongpath from "./Wrongpath.jsx";
 import Login from "./Login";
 import Signup from "./Signup";
 import Settings from "./Settings";
+import Userprofile from "./Userprofile";
 
-export { App, Postlist, Navbar, Home, Wrongpath, Login, Signup, Settings };
+export {
+  App,
+  Postlist,
+  Navbar,
+  Home,
+  Wrongpath,
+  Login,
+  Signup,
+  Settings,
+  Userprofile,
+};

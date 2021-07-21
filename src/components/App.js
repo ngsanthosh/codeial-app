@@ -4,7 +4,16 @@ import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
 
 import { fetchPosts } from "../actions/posts";
-import { Postlist, Navbar, Home, Wrongpath, Login, Signup, Settings } from "./";
+import {
+  Postlist,
+  Navbar,
+  Home,
+  Wrongpath,
+  Login,
+  Signup,
+  Settings,
+  Userprofile,
+} from "./";
 import propTypes from "prop-types";
 import { authenticate } from "../actions/auth";
 
@@ -16,7 +25,7 @@ const PrivateRoute = ({ path, component: Component, isloggedin }) => {
   // const  = PRprops;
   return (
     <Route
-      path
+      path={path}
       render={(props) => {
         return isloggedin ? (
           <Component {...props} />
@@ -81,6 +90,11 @@ class App extends Component {
           <PrivateRoute
             path="/settings"
             component={Settings}
+            isloggedin={auth.isloggedin}
+          />
+          <PrivateRoute
+            path="/user/:ID"
+            component={Userprofile}
             isloggedin={auth.isloggedin}
           />
           <Route component={Wrongpath} />
