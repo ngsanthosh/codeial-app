@@ -322,9 +322,9 @@ nav .nav-links ul li:hover {
   height: 50vh;
   box-sizing: border-box;
   margin-top: 20px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #070707;
   border-radius: 4px;
-  overflow-y: scroll;
+  overflow-y:auto;
 }
 .friends-list .header {
   border-bottom: 1px solid #e0e0e0;

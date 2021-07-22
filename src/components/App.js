@@ -16,6 +16,7 @@ import {
 } from "./";
 import propTypes from "prop-types";
 import { authenticate } from "../actions/auth";
+import { fetchbuddies } from "../actions/friends";
 
 // import logo from '../logo.svg';
 // import '../App.css';
@@ -55,6 +56,8 @@ class App extends Component {
 
       console.log(user, "from jwt");
       this.props.dispatch(authenticate(user));
+
+      this.props.dispatch(fetchbuddies());
     }
   }
 
@@ -70,7 +73,7 @@ class App extends Component {
     // const Signup = () => {
     //   return <div>Signup component</div>;
     // };
-    let { posts, auth } = this.props;
+    let { posts, auth, friends } = this.props;
     console.log("posts", posts);
     return (
       <div>
@@ -82,7 +85,7 @@ class App extends Component {
             path="/"
             exact={true}
             render={(props) => {
-              return <Home {...props} posts={posts} />;
+              return <Home {...props} posts={posts} friends={friends} isloggedin={auth.isloggedin} />;
             }}
           />
           <Route path="/login" component={Login} />
@@ -112,6 +115,7 @@ function mapStatetoProps(state) {
   return {
     posts: state.posts,
     auth: state.auth,
+    friends: state.friends,
   };
 }
 

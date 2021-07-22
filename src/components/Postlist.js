@@ -65,7 +65,7 @@ export default class Postlist extends Component {
             </div>
           ))}
         </div>
-      </div>
+       </div>
     );
   }
 }

@@ -1,5 +1,6 @@
 import { APIurls } from "../pleasehelpme/urls";
-import { FETCH_FRIENDS } from "./actionTypes";
+import { getbearertoken } from "../pleasehelpme/utils";
+import { ADD_FRIENDS, FETCH_FRIENDS, REMOVE_FRIENDS } from "./actionTypes";
 
 export function fetchfriends(friends) {
   return {
@@ -22,4 +23,16 @@ export function fetchbuddies() {
         }
     })
   };
+}
+
+export function addbuddy(friendship){
+    return{
+        type: ADD_FRIENDS,
+        friendship
+    }
+}
+export function removebuddy(){
+    return{
+        type: REMOVE_FRIENDS,
+    }
 }
