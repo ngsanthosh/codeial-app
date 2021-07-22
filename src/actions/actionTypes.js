@@ -24,3 +24,5 @@ export const FETCH_FRIENDS = "FETCH_FRIENDS";
 
 export const ADD_FRIENDS = 'ADD_FRIENDS'
 export const REMOVE_FRIENDS = 'REMOVE_FRIENDS'
+
+export const CREATE_POST = 'CREATE_POST'

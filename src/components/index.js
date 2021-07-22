@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Settings from "./Settings";
 import Userprofile from "./Userprofile";
+import CreatePost from "./CreatePost";
 
 export {
   App,
@@ -18,4 +19,5 @@ export {
   Signup,
   Settings,
   Userprofile,
+  CreatePost
 };

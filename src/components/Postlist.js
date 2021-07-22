@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { CreatePost } from "./";
 
 export default class Postlist extends Component {
   render() {
-    const { posts } = this.props;
+    const { posts } = this.props; 
     if (posts.length === 0) {
       return <h2 className="login-form">Loading...</h2>;
     }
     return (
       <div className="home">
         <div className="posts-list">
+          <CreatePost />
           {posts.map((post) => (
             <div className="post-wrapper" key={post._id}>
               <div className="post-header">
@@ -65,7 +67,7 @@ export default class Postlist extends Component {
             </div>
           ))}
         </div>
-       </div>
+      </div>
     );
   }
 }
