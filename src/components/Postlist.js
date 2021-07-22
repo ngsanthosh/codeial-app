@@ -3,20 +3,69 @@ import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { CreatePost } from "./";
+import { commentkaro, fetchPosts } from "../actions/posts";
+// import { createComment } from "../actions/posts";
 
-export default class Postlist extends Component {
+class Postlist extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: "",
+    };
+  }
+  // componentDidUpdate(){
+  //   this.props.dispatch(fetchPosts())
+  // }
+  allOver = () => {
+    console.log("workinggggg");
+    if (this.state.comment === null) {
+      this.props.dispatch(fetchPosts());
+    }
+  };
+  handleAddComment = (e, post) => {
+    const { comment } = this.state;
+    const {
+      auth: { isloggedin },
+    } = this.props;
+    if (e.key === "Enter") {
+      console.log("Here we are");
+      this.props.dispatch(commentkaro(comment, post._id));
+
+      // clear comment
+      this.setState({
+        comment: null,
+      });
+      // nothing=""
+      // if (comment === null) {
+      //   this.props.dispatch(fetchPosts());
+      // }
+      this.allOver();
+    }
+  };
+
+  handleChange = (e) => {
+    this.setState({ comment: e.target.value });
+    // console.log(this.state.comment);
+  };
+
   render() {
-    const { posts } = this.props; 
+    // const nothing='';
+    const { posts } = this.props;
+    const { comment } = this.state;
+    const {
+      auth: { isloggedin },
+    } = this.props.state;
     if (posts.length === 0) {
       return <h2 className="login-form">Loading...</h2>;
     }
     return (
       <div className="home">
         <div className="posts-list">
-          <CreatePost />
+          {isloggedin && <CreatePost />}
           {posts.map((post) => (
             <div className="post-wrapper" key={post._id}>
               <div className="post-header">
+                {/* {nothing="hello"} */}
                 <div className="post-avatar">
                   <Link to={`/user/${post.user._id}`}>
                     <img
@@ -49,19 +98,32 @@ export default class Postlist extends Component {
                   </div>
                 </div>
                 <div className="post-comment-box">
-                  <input placeholder="Start typing a comment" />
+                  <input
+                    placeholder="Start typing a comment"
+                    onChange={this.handleChange}
+                    onKeyPress={(e) => this.handleAddComment(e, post)}
+                    // value={nothing}
+                  />
                 </div>
 
                 <div className="post-comments-list">
-                  <div className="post-comments-item">
-                    <div className="post-comment-header">
-                      <span className="post-comment-author">Bill</span>
-                      <span className="post-comment-time">a minute ago</span>
-                      <span className="post-comment-likes">22</span>
-                    </div>
+                  {post.comments.map((comment) => (
+                    <div className="post-comment-item">
+                      <div className="post-comment-header">
+                        <span className="post-comment-author">
+                          {comment.user.name}
+                        </span>
+                        <span className="post-comment-time">a minute ago</span>
+                        <span className="post-comment-likes">
+                          {comment.likes.length} likes
+                        </span>
+                      </div>
 
-                    <div className="post-comment-content">Random comment</div>
-                  </div>
+                      <div className="post-comment-content">
+                        {comment.content}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -72,13 +134,13 @@ export default class Postlist extends Component {
   }
 }
 
-Postlist.propTypes = {
-  posts: propTypes.array.isRequired,
-};
-
-// const mapStatetoProps = (state) => {
-//   return {
-//     posts: state.posts,
-//   };
+// Postlist.propTypes = {
+//   posts: propTypes.array.isRequired,
 // };
-// export default connect(mapStatetoProps)(Postlist);
+
+const mapStatetoProps = (state) => {
+  return {
+    state,
+  };
+};
+export default connect(mapStatetoProps)(Postlist);
