@@ -11,6 +11,7 @@ class Userprofile extends Component {
     this.state = {
       success: null,
       error: null,
+      removeFR: null,
     };
   }
   componentDidMount() {
@@ -21,8 +22,6 @@ class Userprofile extends Component {
       this.props.dispatch(fetchUser(match.params.ID));
     }
   }
-
-
 
   handleRemoveFr = async () => {
     const userid = this.props.match.params.ID;
@@ -39,16 +38,15 @@ class Userprofile extends Component {
     const data = await resp.json();
 
     if (data.success) {
-      // this.setState({ success: true });
       this.props.dispatch(removebuddy());
-      this.props.dispatch(fetchbuddies())
+      this.props.dispatch(fetchbuddies());
+      this.setState({ removeFR: true });
       return;
     } else {
       this.setState({ error: data.message });
       return <div>{data.message}</div>;
     }
   };
-
 
   handleAddFr = async () => {
     const userid = this.props.match.params.ID;
@@ -74,7 +72,7 @@ class Userprofile extends Component {
     }
   };
   render() {
-    const { success, error } = this.state;
+    const { success, error, removeFR } = this.state;
     // console.log(this.props);
     const { params } = this.props.match;
 
@@ -95,6 +93,9 @@ class Userprofile extends Component {
         </div>
         {success && (
           <div className="alert success-dailog">Friend Added Successfully</div>
+        )}
+        {removeFR && (
+          <div className="alert success-dailog">Friend Removed Successfully</div>
         )}
         {error && <div className="alert error-dailog">{error}</div>}
         <div className="field">
