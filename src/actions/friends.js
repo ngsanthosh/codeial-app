@@ -31,8 +31,9 @@ export function addbuddy(friendship){
         friendship
     }
 }
-export function removebuddy(){
+export function removebuddy(id){
     return{
         type: REMOVE_FRIENDS,
+        id
     }
 }

@@ -38,8 +38,8 @@ class Userprofile extends Component {
     const data = await resp.json();
 
     if (data.success) {
-      this.props.dispatch(removebuddy());
-      this.props.dispatch(fetchbuddies());
+      this.props.dispatch(removebuddy(userid));
+      // this.props.dispatch(fetchbuddies());
       this.setState({ removeFR: true });
       return;
     } else {
