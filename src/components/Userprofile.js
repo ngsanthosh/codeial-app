@@ -71,7 +71,23 @@ class Userprofile extends Component {
       return <div>{data.message}</div>;
     }
   };
+  checkWhetherFriend = () => {
+    const { friends } = this.props;
+    const userid = this.props.match.params.ID;
+
+    const givemesomething = friends
+      .map((friend) => friend.to_user._id)
+      .indexOf(userid);
+
+    if (givemesomething !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
+    const isfriend = this.checkWhetherFriend();
     const { success, error, removeFR } = this.state;
     // console.log(this.props);
     const { params } = this.props.match;
@@ -95,7 +111,9 @@ class Userprofile extends Component {
           <div className="alert success-dailog">Friend Added Successfully</div>
         )}
         {removeFR && (
-          <div className="alert success-dailog">Friend Removed Successfully</div>
+          <div className="alert success-dailog">
+            Friend Removed Successfully
+          </div>
         )}
         {error && <div className="alert error-dailog">{error}</div>}
         <div className="field">
@@ -109,20 +127,23 @@ class Userprofile extends Component {
         </div>
 
         <div className="btn-grp">
-          <button className="button save-btn" onClick={this.handleAddFr}>
-            Add Friend
-          </button>
-          <button className="button save-btn" onClick={this.handleRemoveFr}>
-            Remove Friend
-          </button>
+          {!isfriend ? (
+            <button className="button save-btn" onClick={this.handleAddFr}>
+              Add Friend
+            </button>
+          ) : (
+            <button className="button save-btn" onClick={this.handleRemoveFr}>
+              Remove Friend
+            </button>
+          )}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ profile }) => {
-  return { profile };
+const mapStateToProps = ({ profile, friends }) => {
+  return { profile, friends };
 };
 
 export default connect(mapStateToProps)(Userprofile);
