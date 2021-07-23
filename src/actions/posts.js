@@ -93,7 +93,7 @@ export function addlike(id, liketype, userid) {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `bearer ${getbearertoken()} `,
       },
-    }).then(resp=>resp.date)/then(data=>{
+    }).then(resp=>resp.date).then(data=>{
       console.log(data);
       dispatch(addpostlike(id, userid))
     })

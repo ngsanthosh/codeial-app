@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { CreatePost } from "./";
-import { commentkaro, fetchPosts } from "../actions/posts";
+import { addlike, commentkaro, fetchPosts } from "../actions/posts";
 import Wrongpath from "./Wrongpath.jsx";
 // import { createComment } from "../actions/posts";
 
@@ -12,8 +12,20 @@ class Postlist extends Component {
     super(props);
     this.state = {
       comment: "",
+      isliked: false,
     };
   }
+  isPostLikedByUser = (post) => {
+    const {
+      auth: { user },
+    } = this.props.state;
+    let boolea = post.likes.includes(user._id);
+    if (boolea) {
+      return true;
+    }
+    return false;
+  };
+
   // componentDidUpdate(){
   //   this.props.dispatch(fetchPosts())
   // }
@@ -52,10 +64,24 @@ class Postlist extends Component {
     // console.log(this.state.comment);
   };
 
+  handlelike = (e, post) => {
+    this.setState({ post });
+    const isliked = this.isPostLikedByUser(post);
+    if (isliked) {
+      this.setState({isliked:true})
+      // this.forceUpdate();
+    }
+    const {
+      auth: { user },
+    } = this.props.state;
+    this.props.dispatch(addlike(post._id, "Post", user._id));
+  };
+
   render() {
     // const nothing='';
     const { posts } = this.props;
     const { comment } = this.state;
+    const isliked = this.state.isliked
     const {
       auth: { isloggedin },
     } = this.props.state;
@@ -67,6 +93,8 @@ class Postlist extends Component {
         <div className="posts-list">
           {isloggedin && <CreatePost />}
           {posts.map((post) => (
+            // isPostLikedByUser = post.likes.includes(user._id)
+            // {(post)=this.isPostLikedByUser(post)}
             <div className="post-wrapper" key={post._id}>
               <div className="post-header">
                 {/* {nothing="hello"} */}
@@ -75,21 +103,32 @@ class Postlist extends Component {
                     <img
                       src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                       alt="user-pic"
-                    />
+                      />
                   </Link>
                   <div>
                     <span className="post-author">{post.user.name}</span>
                     <span className="post-time">a minute ago</span>
                   </div>
                 </div>
+                  const isliked = this.isPostLikedByUser(post);
                 <div className="post-content">{post.content}</div>
 
                 <div className="post-actions">
-                  <div className="post-like">
-                    <img
-                      src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-                      alt="likes-icon"
-                    />
+                  <div
+                    className="post-like"
+                    onClick={(e) => this.handlelike(e, post)}
+                  >
+                    {isliked ? (
+                      <img
+                        src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                        alt="like-post"
+                      />
+                    ) : (
+                      <img
+                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                        alt="likes-icon"
+                      />
+                    )}
                     <span>{post.likes.length}</span>
                   </div>
 
