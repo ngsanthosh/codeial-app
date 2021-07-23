@@ -27,3 +27,5 @@ export const REMOVE_FRIENDS = 'REMOVE_FRIENDS'
 
 export const CREATE_POST = 'CREATE_POST'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
+
+export const UPDATE_POST_LIKE = 'C'

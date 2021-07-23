@@ -2,6 +2,7 @@ import {
   CREATE_COMMENT,
   CREATE_POST,
   UPDATE_POSTS,
+  UPDATE_POST_LIKE,
 } from "../actions/actionTypes";
 
 export function posts(state = [], action) {
@@ -25,6 +26,20 @@ export function posts(state = [], action) {
         }
       });
       return newArray;
+    }
+    case UPDATE_POST_LIKE: {
+      const newArray1 = state.map((post) => {
+        // console.log(post.comment);
+        if (post._id === action.postid) {
+          return {
+            ...post,
+            likes: [...post.likes, action.userid],
+          };
+        } else {
+          return post;
+        }
+      });
+      return newArray1;
     }
     default:
       return state;

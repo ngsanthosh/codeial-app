@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { CreatePost } from "./";
 import { commentkaro, fetchPosts } from "../actions/posts";
+import Wrongpath from "./Wrongpath.jsx";
 // import { createComment } from "../actions/posts";
 
 class Postlist extends Component {
@@ -16,30 +17,33 @@ class Postlist extends Component {
   // componentDidUpdate(){
   //   this.props.dispatch(fetchPosts())
   // }
-  allOver = () => {
-    console.log("workinggggg");
-    if (this.state.comment === null) {
-      this.props.dispatch(fetchPosts());
-    }
-  };
+  // allOver = () => {
+  //   console.log("workinggggg");
+  //   if (this.state.comment === null) {
+  //     this.props.dispatch(fetchPosts());
+  //   }
+  // };
   handleAddComment = (e, post) => {
-    const { comment } = this.state;
-    const {
-      auth: { isloggedin },
-    } = this.props;
-    if (e.key === "Enter") {
-      console.log("Here we are");
-      this.props.dispatch(commentkaro(comment, post._id));
+    const { isloggedin } = this.props.state.auth;
+    console.log(isloggedin);
+    if (isloggedin) {
+      const { comment } = this.state;
+      if (e.key === "Enter") {
+        console.log("Here we are");
+        this.props.dispatch(commentkaro(comment, post._id));
 
-      // clear comment
-      this.setState({
-        comment: null,
-      });
-      // nothing=""
-      // if (comment === null) {
-      //   this.props.dispatch(fetchPosts());
-      // }
-      this.allOver();
+        // clear comment
+        this.setState({
+          comment: null,
+        });
+        // nothing=""
+        // if (comment === null) {
+        //   this.props.dispatch(fetchPosts());
+        // }
+        // this.allOver();
+      }
+    } else {
+      console.log("Whatsoever!!!");
     }
   };
 
@@ -98,12 +102,14 @@ class Postlist extends Component {
                   </div>
                 </div>
                 <div className="post-comment-box">
-                  <input
-                    placeholder="Start typing a comment"
-                    onChange={this.handleChange}
-                    onKeyPress={(e) => this.handleAddComment(e, post)}
-                    // value={nothing}
-                  />
+                  {isloggedin && (
+                    <input
+                      placeholder="Start typing a comment"
+                      onChange={this.handleChange}
+                      onKeyPress={(e) => this.handleAddComment(e, post)}
+                      // value={nothing}
+                    />
+                  )}
                 </div>
 
                 <div className="post-comments-list">

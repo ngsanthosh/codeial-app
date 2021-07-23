@@ -1,6 +1,11 @@
 import { APIurls } from "../pleasehelpme/urls.js";
 import { getbearertoken, getFormBody } from "../pleasehelpme/utils.js";
-import { UPDATE_POSTS, CREATE_POST, CREATE_COMMENT } from "./actionTypes.js";
+import {
+  UPDATE_POSTS,
+  CREATE_POST,
+  CREATE_COMMENT,
+  UPDATE_POST_LIKE,
+} from "./actionTypes.js";
 
 export function fetchPosts() {
   return (dispatch) => {
@@ -75,5 +80,30 @@ export function addcomment(comment, id) {
     type: CREATE_COMMENT,
     comment,
     id,
+  };
+}
+
+export function addlike(id, liketype, userid) {
+  return (dispatch) => {
+    const url = APIurls.createlikes(id, liketype);
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `bearer ${getbearertoken()} `,
+      },
+    }).then(resp=>resp.date)/then(data=>{
+      console.log(data);
+      dispatch(addpostlike(id, userid))
+    })
+  };
+}
+
+export function addpostlike(postid, userid) {
+  return {
+    type: UPDATE_POST_LIKE,
+    postid,
+    userid,
   };
 }
