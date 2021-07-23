@@ -68,7 +68,7 @@ class Postlist extends Component {
     this.setState({ post });
     const isliked = this.isPostLikedByUser(post);
     if (isliked) {
-      this.setState({isliked:true})
+      this.setState({ isliked: true });
       // this.forceUpdate();
     }
     const {
@@ -81,7 +81,7 @@ class Postlist extends Component {
     // const nothing='';
     const { posts } = this.props;
     const { comment } = this.state;
-    const isliked = this.state.isliked
+    const isliked = this.state.isliked;
     const {
       auth: { isloggedin },
     } = this.props.state;
@@ -103,17 +103,37 @@ class Postlist extends Component {
                     <img
                       src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
                       alt="user-pic"
-                      />
+                    />
                   </Link>
                   <div>
                     <span className="post-author">{post.user.name}</span>
                     <span className="post-time">a minute ago</span>
                   </div>
                 </div>
-                  const isliked = this.isPostLikedByUser(post);
+                {/* const isliked = this.isPostLikedByUser(post); */}
                 <div className="post-content">{post.content}</div>
 
                 <div className="post-actions">
+                  {console.log("isloggedin", isloggedin)}
+                  {isloggedin && (
+                    <div
+                      className="post-like"
+                      onClick={(e) => this.handlelike(e, post)}
+                    >
+                      {isliked ? (
+                        <img
+                          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                          alt="like-post"
+                        />
+                      ) : (
+                        <img
+                          src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                          alt="likes-icon"
+                        />
+                      )}
+                      <span>{post.likes.length}</span>
+                    </div>
+                  )}
                   <div
                     className="post-like"
                     onClick={(e) => this.handlelike(e, post)}

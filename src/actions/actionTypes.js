@@ -28,4 +28,9 @@ export const REMOVE_FRIENDS = 'REMOVE_FRIENDS'
 export const CREATE_POST = 'CREATE_POST'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 
-export const UPDATE_POST_LIKE = 'C'
+export const UPDATE_POST_LIKE = 'UPDATE_POST_LIKE'
+
+export const FETCH_USER_FROM_SEARCH = 'FETCH_USER_FROM_SEARCH'
+
+
+
