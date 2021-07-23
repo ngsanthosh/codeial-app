@@ -20,12 +20,12 @@ class Navbar extends Component {
   handleSearch = (e) => {
     const searchtext = e.target.value;
     this.setState({ searchttext: e.target.value });
-    console.log("from state",this.state.searchttext);
+    console.log("from state", this.state.searchttext);
     this.props.dispatch(fetchuserfromsearch(searchtext));
   };
-  
+
   render() {
-    const {searchttext} = this.state
+    const { searchttext } = this.state;
     const { isloggedin, user } = this.props.auth;
     const { results } = this.props.search;
     console.log(results);
@@ -46,12 +46,20 @@ class Navbar extends Component {
               className="search-icon"
               src="https://image.flaticon.com/icons/svg/483/483356.svg"
               alt="search-icon"
-              />
+            />
             {console.log(results.length)}
-            <input placeholder="Search" onChange={this.handleSearch} />
+            {isloggedin ? (
+              <input placeholder="Search" onChange={this.handleSearch} />
+            ) : (
+              <input
+                placeholder="Please Login to search..."
+                // value="Please Login to search..."
+                disabled
+              />
+            )}
+
             {searchttext.length > 0 && (
               <div className="search-results">
-                
                 {results.map((user) => (
                   <ul>
                     <Link to={`/user/${user._id}`}>
