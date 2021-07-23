@@ -23,6 +23,21 @@ class Userprofile extends Component {
     }
   }
 
+  componentDidUpdate(Prevprops) {
+    const {
+      match: { params: oldparams },
+    } = Prevprops;
+    const {
+      match: { params: newparams },
+    } = this.props;
+
+    if (oldparams && newparams && oldparams.ID !== newparams.ID) {
+      this.props.dispatch(fetchUser(this.props.match.params.ID));
+    }
+
+    // this.props.dispatch(fetchuserfromsearch(this.state.searchtext));
+  }
+
   handleRemoveFr = async () => {
     const userid = this.props.match.params.ID;
     const url = APIurls.removefriend(userid);

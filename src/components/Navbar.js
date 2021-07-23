@@ -4,15 +4,32 @@ import { Link } from "react-router-dom";
 // import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logout } from "../actions/auth";
+import { fetchuserfromsearch } from "../actions/search";
+import { fetchUser } from "../actions/profile";
 
 class Navbar extends Component {
-  logout = () =>{
-    localStorage.removeItem('token')
-    this.props.dispatch(logout())
+  constructor(props) {
+    super(props);
+    this.state = { searchttext: "" };
   }
+  logout = () => {
+    localStorage.removeItem("token");
+    this.props.dispatch(logout());
+  };
+
+  handleSearch = (e) => {
+    const searchtext = e.target.value;
+    this.setState({ searchttext: e.target.value });
+    console.log("from state",this.state.searchttext);
+    this.props.dispatch(fetchuserfromsearch(searchtext));
+  };
+  
   render() {
+    const {searchttext} = this.state
     const { isloggedin, user } = this.props.auth;
-    console.log(isloggedin)
+    const { results } = this.props.search;
+    console.log(results);
+    console.log(isloggedin);
     return (
       <div>
         <nav className="nav">
@@ -29,37 +46,37 @@ class Navbar extends Component {
               className="search-icon"
               src="https://image.flaticon.com/icons/svg/483/483356.svg"
               alt="search-icon"
-            />
-            <input placeholder="Search" />
-
-            <div className="search-results">
-              <ul>
-                <li className="search-results-row">
-                  <img
-                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                    alt="user-dp"
-                  />
-                  <span>John Doe</span>
-                </li>
-                <li className="search-results-row">
-                  <img
-                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                    alt="user-dp"
-                  />
-                  <span>John Doe</span>
-                </li>
-              </ul>
-            </div>
+              />
+            {console.log(results.length)}
+            <input placeholder="Search" onChange={this.handleSearch} />
+            {searchttext.length > 0 && (
+              <div className="search-results">
+                
+                {results.map((user) => (
+                  <ul>
+                    <Link to={`/user/${user._id}`}>
+                      <li className="search-results-row">
+                        <img
+                          src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                          alt="user-dp"
+                        />
+                        <span>{user.name}</span>
+                      </li>
+                    </Link>
+                  </ul>
+                ))}
+              </div>
+            )}
           </div>
           <div className="right-nav">
             {isloggedin && (
               <div className="user">
                 <Link to="/settings">
-                <img
-                  src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
-                  alt="user-dp"
-                  id="user-dp"
-                />
+                  <img
+                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                    alt="user-dp"
+                    id="user-dp"
+                  />
                 </Link>
                 <span>{user.name}</span>
               </div>
@@ -72,11 +89,7 @@ class Navbar extends Component {
                     <Link to="/login">Log in</Link>
                   </li>
                 )}
-                {isloggedin && (
-                  <li onClick={this.logout}>
-                    Log out
-                  </li>
-                )}
+                {isloggedin && <li onClick={this.logout}>Log out</li>}
 
                 {!isloggedin && (
                   <li>
@@ -92,8 +105,11 @@ class Navbar extends Component {
   }
 }
 
-const mapStatetoProps = ({ auth }) => {
-  return { auth };
+const mapStatetoProps = (state) => {
+  return {
+    auth: state.auth,
+    search: state.search,
+  };
 };
 
 export default connect(mapStatetoProps)(Navbar);
