@@ -52,7 +52,7 @@ class Navbar extends Component {
               <input placeholder="Search" onChange={this.handleSearch} />
             ) : (
               <input
-                placeholder="Please Login to search..."
+                placeholder="Please Login to Search, Like, Comment and Post feed.."
                 // value="Please Login to search..."
                 disabled
               />

@@ -115,7 +115,7 @@ class Postlist extends Component {
 
                 <div className="post-actions">
                   {console.log("isloggedin", isloggedin)}
-                  {isloggedin && (
+                  {isloggedin ? (
                     <div
                       className="post-like"
                       onClick={(e) => this.handlelike(e, post)}
@@ -133,24 +133,24 @@ class Postlist extends Component {
                       )}
                       <span>{post.likes.length}</span>
                     </div>
+                  ) : (
+                    <div
+                      className="post-like"
+                    >
+                      {isliked ? (
+                        <img
+                          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                          alt="like-post"
+                        />
+                      ) : (
+                        <img
+                          src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                          alt="likes-icon"
+                        />
+                      )}
+                      <span>{post.likes.length}</span>
+                    </div>
                   )}
-                  <div
-                    className="post-like"
-                    onClick={(e) => this.handlelike(e, post)}
-                  >
-                    {isliked ? (
-                      <img
-                        src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
-                        alt="like-post"
-                      />
-                    ) : (
-                      <img
-                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
-                        alt="likes-icon"
-                      />
-                    )}
-                    <span>{post.likes.length}</span>
-                  </div>
 
                   <div className="post-comments-icon">
                     <img

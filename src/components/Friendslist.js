@@ -10,7 +10,7 @@ const FriendsList = (props) => {
 
           {props.friends && props.friends.length === 0 && (
             <div className="no-friends">No friends found!</div>
-          )}
+          )} 
 
           {props.friends &&
             props.friends.map((friend) => (
