@@ -85,7 +85,14 @@ class App extends Component {
             path="/"
             exact={true}
             render={(props) => {
-              return <Home {...props} posts={posts} friends={friends} isloggedin={auth.isloggedin} />;
+              return (
+                <Home
+                  {...props}
+                  posts={posts}
+                  friends={friends}
+                  isloggedin={auth.isloggedin}
+                />
+              );
             }}
           />
           <Route path="/login" component={Login} />
@@ -101,7 +108,20 @@ class App extends Component {
             isloggedin={auth.isloggedin}
           />
           <Route component={Wrongpath} />
+          {/* <Route component={Aboutm} */}
         </Switch>
+
+        <div className="credits">
+          Made with ❤ by{" "}
+          <a
+            href="https://github.com/ngsanthosh"
+            target="_blank"
+            rel="noreferrer"
+            style={{textDecoration:'none'}}
+          >
+            Santhosh
+          </a>{" "}
+        </div>
       </div>
     );
   }

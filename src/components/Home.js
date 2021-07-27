@@ -8,12 +8,13 @@ export default class Home extends Component {
     console.log(this.props);
 
     return (
-      <div>
-        {this.props.isloggedin && <FriendsList friends={this.props.friends} />}
+      <div className="home">
+      
         <Postlist posts={this.props.posts} />
+        {this.props.isloggedin && <FriendsList friends={this.props.friends} />}
         {this.props.isloggedin && <Chat />}
         {/* <Chat /> */}
-        {/* <div style={{textAlign=center}}>Made with ♥ by Santhosh</div> */}
+        {/* <div className="credits">Made with ❤ by Santhosh</div> */}
       </div>
     );
   }

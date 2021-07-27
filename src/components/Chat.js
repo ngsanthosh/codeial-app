@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
+import { connect } from 'react-redux';
 
 class Chat extends Component {
   constructor(props) {
@@ -8,7 +10,63 @@ class Chat extends Component {
       messages: [], // {content: 'some message', self: true}
       typedMessage: '',
     };
+    this.socket = io.connect('http://codeial.codingninjas.com:5000');
+    console.log("Helooo")
+
+    this.userEmail = props.user.email;
+    console.log(this.userEmail);
+
+    if (this.userEmail) {
+      this.setupConnections();
+    }
   }
+
+  setupConnections = () => {
+    const socketConnection = this.socket;
+    const self = this;
+
+    this.socket.on('connect', function () {
+      console.log('CONNECTION ESTABLISHED');
+
+      socketConnection.emit('join_room', {
+        user_email: this.userEmail,
+        chatroom: 'codeial',
+      });
+
+      socketConnection.on('user_joined', function (data) {
+        console.log('NE USER JOINED', data);
+      });
+    });
+
+    this.socket.on('receive_message', function (data) {
+      // add message to state
+      const { messages } = self.state;
+      const messageObject = {};
+      messageObject.content = data.message;
+
+      if (data.user_email === self.userEmail) {
+        messageObject.self = true;
+      }
+
+      self.setState({
+        messages: [...messages, messageObject],
+        typedMessage: '',
+      });
+    });
+  };
+
+  handleSubmit = () => {
+    const { typedMessage } = this.state;
+
+    if (typedMessage && this.userEmail) {
+      this.socket.emit('send_message', {
+        message: typedMessage,
+        user_email: this.userEmail,
+        chatroom: 'codeial',
+      });
+    }
+  };
+
   render() {
     const { typedMessage, messages } = this.state;
 
@@ -18,7 +76,7 @@ class Chat extends Component {
           Chat
           <img
             src="https://www.pinclipart.com/picdir/middle/399-3998779_minus-sign-svg-png-icon-free-download-minus.png"
-            alt="None"
+            alt=""
             height={17}
           />
         </div>
@@ -48,4 +106,9 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+function mapStateToProps({ auth }) {
+  return {
+    user: auth.user,
+  };
+}
+export default connect(mapStateToProps)(Chat);
