@@ -62,6 +62,7 @@ class App extends Component {
   }
 
   render() {
+    
     // const Home = () => {
     //   return <Home />;
     // };
@@ -77,6 +78,7 @@ class App extends Component {
     console.log("posts", posts);
     return (
       <div>
+        
         <Navbar />
 
         {/* <Postlist posts={posts} /> */}

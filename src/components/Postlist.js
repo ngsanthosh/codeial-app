@@ -123,11 +123,13 @@ class Postlist extends Component {
                       <img
                         src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
                         alt="like-post"
+                        
                       />
                     ) : (
                       <img
                         src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
                         alt="likes-icon"
+                        
                       />
                     )}
                     <span>{post.likes.length}</span>
@@ -138,14 +140,17 @@ class Postlist extends Component {
                       <div>
                         {/* <span class="tooltiptext">Tooltip text</span> */}
                         <img
+
                           src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
                           alt="like-post"
+                          title="Login to like"
                         />
                       </div>
                     ) : (
                       <img
                         src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
                         alt="likes-icon"
+                        title="Login to Like"
                       />
                     )}
                     <span>{post.likes.length}</span>
@@ -156,6 +161,7 @@ class Postlist extends Component {
                   <img
                     src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
                     alt="comments-icon"
+                    title="Login to Comment"
                   />
                   <span>{post.comments.length}</span>
                 </div>

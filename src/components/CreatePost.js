@@ -11,7 +11,8 @@ class CreatePost extends Component {
   }
 
   handleOnClick = () => {
-    // dispatch action
+    // dispatch action\
+    if(this.state.content!==undefined)
     this.props.dispatch(postKaro(this.state.content))
   };
 
