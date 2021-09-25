@@ -43,6 +43,7 @@ class Login extends Component {
     const { error, inprogress, isloggedin } = this.props.auth;
     console.log(this.props.location);
     const { from } = this.props.location.state || { from :{pathname:"/"} }
+
     // console.log(error)
     if(isloggedin)
     {
@@ -50,6 +51,7 @@ class Login extends Component {
     }
     return(
       <div>
+        
         <form className="login-form">
           <span className="login-signup-header">Log In</span>
           {error && <div className="alert error-dailog">{error}</div>}

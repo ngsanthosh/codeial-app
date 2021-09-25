@@ -24,6 +24,7 @@ class CreatePost extends Component {
     return (
       <div className="create-post">
         <textarea
+          placeholder="Start a post..."
           className="add-post"
           value={this.state.content}
           onChange={this.handleChange}

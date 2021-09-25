@@ -497,11 +497,15 @@ nav .nav-links ul li:hover {
   justify-content: flex-end;
 }
 .create-post textarea {
+  /* font-family: 'Times New Roman', Times, serif; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   height: 90px;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
-  font-size: 15px;
+  font-size: 18px;
   border: none;
   resize: none;
   border-top-right-radius: 3px;

@@ -121,7 +121,7 @@ class Postlist extends Component {
                   >
                     {isliked ? (
                       <img
-                        src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
                         alt="like-post"
                       />
                     ) : (

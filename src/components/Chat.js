@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
+// import '../chat.css';
 
 class Chat extends Component {
   constructor(props) {
@@ -10,11 +11,8 @@ class Chat extends Component {
       messages: [], // {content: 'some message', self: true}
       typedMessage: '',
     };
-    this.socket = io.connect('http://codeial.codingninjas.com:5000');
-    console.log("Helooo")
-
+    this.socket = io.connect('http://codeial.codingninjas.com:3000');
     this.userEmail = props.user.email;
-    console.log(this.userEmail);
 
     if (this.userEmail) {
       this.setupConnections();
@@ -75,12 +73,14 @@ class Chat extends Component {
         <div className="chat-header">
           Chat
           <img
-            src="https://www.pinclipart.com/picdir/middle/399-3998779_minus-sign-svg-png-icon-free-download-minus.png"
+            src="https://www.iconsdb.com/icons/preview/white/minus-5-xxl.png"
             alt=""
             height={17}
           />
         </div>
         <div className="chat-messages">
+          
+        {console.log("messages", messages)}
           {messages.map((message) => (
             <div
               className={
