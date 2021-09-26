@@ -15,6 +15,7 @@ class Userprofile extends Component {
     };
   }
   componentDidMount() {
+    document.title="Codeial - User profile"
     const { match } = this.props;
 
     if (match.params.ID) {

@@ -13,6 +13,9 @@ class Login extends Component {
       password: "",
     };
   }
+  componentDidMount(){
+    document.title="Codeial - Login"
+  }
   componentWillUnmount() {
     this.props.dispatch(clearerror())
   }

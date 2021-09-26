@@ -13,6 +13,9 @@ class Signup extends Component {
       confirmPassword: " ",
     };
   }
+  componentDidMount(){
+    document.title="Codeial - Signup"
+  }
   componentWillUnmount() {
     this.props.dispatch(clearerror());
   }

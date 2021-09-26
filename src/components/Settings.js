@@ -13,6 +13,11 @@ class Settings extends Component {
       goback: false,
     };
   }
+  componentDidMount() {
+    
+    document.title="Codeial - Manage Account"
+  }
+  
   componentWillUnmount() {
     this.props.dispatch(clearerror());
   }

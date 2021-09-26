@@ -4,6 +4,9 @@ import Chat from "./Chat";
 import FriendsList from "./Friendslist";
 
 export default class Home extends Component {
+  componentDidMount(){
+    document.title="Codeial - Home"
+  }
   render() {
     console.log(this.props);
     const HOME = "Homee"

@@ -47,6 +47,7 @@ const PrivateRoute = ({ path, component: Component, isloggedin }) => {
 
 class App extends Component {
   componentDidMount() {
+    
     this.props.dispatch(fetchPosts());
 
     const token = localStorage.getItem("token");
