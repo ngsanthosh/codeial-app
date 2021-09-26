@@ -23,6 +23,7 @@ class CreatePost extends Component {
     });
   };
   render() {
+    // const hello="Santohs"
     return (
       <div className="create-post">
         <textarea

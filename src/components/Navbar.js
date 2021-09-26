@@ -13,6 +13,7 @@ class Navbar extends Component {
     this.state = { searchttext: "" };
   }
   logout = () => {
+    document.title="Codeial"
     localStorage.removeItem("token");
     this.props.dispatch(logout());
   };

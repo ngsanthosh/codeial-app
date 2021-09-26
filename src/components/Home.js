@@ -4,17 +4,19 @@ import Chat from "./Chat";
 import FriendsList from "./Friendslist";
 
 export default class Home extends Component {
-  componentDidMount(){
-    document.title="Codeial - Home"
+  componentDidMount() {
+    this.props.isloggedin
+      ? (document.title = "Codeial - Home")
+      : (document.title = "Codeial");
   }
   render() {
     console.log(this.props);
-    const HOME = "Homee"
-    
+    const HOME = "Homee";
+
     return (
       <div className="home">
         <title>{HOME}</title>
-      
+
         <Postlist posts={this.props.posts} />
         {this.props.isloggedin && <FriendsList friends={this.props.friends} />}
         {/* {this.props.isloggedin && <Chat />} */}
