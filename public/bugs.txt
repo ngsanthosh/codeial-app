@@ -1,0 +1,2 @@
+1. Chat issue
+2. Friends being not displayed correctly on first render

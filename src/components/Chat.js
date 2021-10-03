@@ -8,10 +8,11 @@ class Chat extends Component {
     super(props);
 
     this.state = {
-      messages: [], // {content: 'some message', self: true}
+      messages: {content:"Santhosh",self:true}, // {content: 'some message', self: true}
       typedMessage: '',
     };
-    this.socket = io.connect('http://codeial.codingninjas.com:3000');
+    this.socket = io.connect('http://codeial.codingninjas.com:5000');
+    console.log(props.user.email);
     this.userEmail = props.user.email;
 
     if (this.userEmail) {
@@ -28,11 +29,11 @@ class Chat extends Component {
 
       socketConnection.emit('join_room', {
         user_email: this.userEmail,
-        chatroom: 'codeial',
+        chatroom: 'Codeial',
       });
 
       socketConnection.on('user_joined', function (data) {
-        console.log('NE USER JOINED', data);
+        console.log('NEW USER JOINED', data);
       });
     });
 
@@ -60,7 +61,7 @@ class Chat extends Component {
       this.socket.emit('send_message', {
         message: typedMessage,
         user_email: this.userEmail,
-        chatroom: 'codeial',
+        chatroom: 'Codeial',
       });
     }
   };

@@ -44,3 +44,13 @@ class CreatePost extends Component {
 }
 
 export default connect()(CreatePost);
+
+
+// const mapStatetoProps = (state) => {
+//   return {
+//     auth: state.auth,
+//     search: state.search,
+//   };
+// };
+
+// export default connect(mapStatetoProps)(CreatePost);
