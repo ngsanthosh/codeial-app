@@ -61,7 +61,7 @@ class Login extends Component {
           <div className="field">
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Your mail ID"
               required
               onChange={this.handleEmailChange}
             />
