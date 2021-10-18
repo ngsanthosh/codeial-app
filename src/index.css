@@ -320,6 +320,7 @@ nav .nav-links ul li:hover {
   background: #fff;
   margin-left: 50px;
   flex-grow: 0.2;
+  width: 40vh;
   height: 50vh;
   box-sizing: border-box;
   margin-top: 20px;
