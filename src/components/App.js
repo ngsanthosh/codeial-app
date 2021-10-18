@@ -17,6 +17,7 @@ import {
 import propTypes from "prop-types";
 import { authenticate } from "../actions/auth";
 import { fetchbuddies } from "../actions/friends";
+import Changeview from "./Changeview";
 
 // import logo from '../logo.svg';
 // import '../App.css';
@@ -78,7 +79,8 @@ class App extends Component {
     let { posts, auth, friends } = this.props;
     console.log("posts", posts);
     return (
-      <div>
+      <>
+      <div className="sample">
         
         <Navbar />
 
@@ -89,12 +91,15 @@ class App extends Component {
             exact={true}
             render={(props) => {
               return (
+                <>
                 <Home
                   {...props}
                   posts={posts}
                   friends={friends}
                   isloggedin={auth.isloggedin}
                 />
+                {/* <Changeview /> */}
+                </>
               );
             }}
           />
@@ -126,6 +131,8 @@ class App extends Component {
           </a>{" "}
         </div>
       </div>
+      <Changeview/>
+      </>
     );
   }
 }

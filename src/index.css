@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -623,8 +622,8 @@ nav .nav-links ul li:hover {
 .chat-footer button:hover {
   cursor: pointer;
 }
-.credits{
-  font-family:Arial, Helvetica, sans-serif;
+.credits {
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   padding: 15px;
 
@@ -645,7 +644,7 @@ nav .nav-links ul li:hover {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-  
+
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -654,14 +653,39 @@ nav .nav-links ul li:hover {
   margin-left: -60px;
 }
 
-/* @media only screen and (max-width: 600px) {
+.change-view {
+  color: black;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  /* background-color: white; */
+
+}
+
+.change-view h4 {
+  background-color: white;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+@media only screen and (max-width: 600px) {
   body {
+    background-color: black;
+  }
+  /* .nav{
     display: none;
   }
-  span{
-    color:black
+  .home {
+    display: none;
+  } */
+  .sample{
+    display: none;
   }
-} */
+  .change-view {
+    display: flex;
+  }
+}
 
 /* .helio {
 

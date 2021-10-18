@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Postlist } from "./";
 import Chat from "./Chat";
 import FriendsList from "./Friendslist";
+import Changeview from "./Changeview";
 
 export default class Home extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ export default class Home extends Component {
     return (
       <div className="home">
         <title>{HOME}</title>
-
+        <Changeview />
         <Postlist posts={this.props.posts} />
         {this.props.isloggedin && <FriendsList friends={this.props.friends} />}
         {/* {this.props.isloggedin && <Chat />} */}
