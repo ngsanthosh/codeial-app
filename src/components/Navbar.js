@@ -52,7 +52,7 @@ class Navbar extends Component {
             {isloggedin ? (
               <input placeholder="Search" onChange={this.handleSearch} />
             ) : (
-              <input
+              <input className="no-cursor"
                 placeholder="Please Login to Search, Like, Comment, Post feed and more.."
                 // value="Please Login to search..."
                 disabled

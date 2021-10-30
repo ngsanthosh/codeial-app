@@ -117,6 +117,9 @@ code {
 .post-actions img:hover {
   cursor: pointer;
 }
+.post-actions .hello img:hover {
+  cursor: not-allowed;
+}
 .post-like {
   display: flex;
   align-items: center;
@@ -319,8 +322,8 @@ nav .nav-links ul li:hover {
   background: #fff;
   margin-left: 50px;
   flex-grow: 0.2;
-  width: 40vh;
-  height: 50vh;
+  width: 30%;
+  height: 50%;
   box-sizing: border-box;
   margin-top: 20px;
   border: 1px solid #e0e0e0;
@@ -410,6 +413,10 @@ nav .nav-links ul li:hover {
   cursor: pointer;
 }
 .field .no-cursor:hover {
+  cursor: not-allowed;
+}
+
+.no-cursor:hover {
   cursor: not-allowed;
 }
 

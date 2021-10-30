@@ -12,7 +12,7 @@ class Postlist extends Component {
     super(props);
     this.state = {
       comment: "",
-      isliked: false,
+      likes: 0,
     };
   }
   isPostLikedByUser = (post) => {
@@ -47,6 +47,7 @@ class Postlist extends Component {
         // clear comment
         this.setState({
           comment: null,
+          // likes:0
         });
         // nothing=""
         // if (comment === null) {
@@ -65,12 +66,14 @@ class Postlist extends Component {
   };
 
   handlelike = (e, post) => {
-    this.setState({ post });
-    const isliked = this.isPostLikedByUser(post);
-    if (isliked) {
-      this.setState({ isliked: true });
-      // this.forceUpdate();
-    }
+    let {likes}=this.state
+    this.setState({likes:1});
+    // const isliked = this.isPostLikedByUser(post);
+    // if (isliked) {
+    //   this.setState({ isliked: true });
+    //   // this.forceUpdate();
+    // }
+    
     const {
       auth: { user },
     } = this.props.state;
@@ -80,7 +83,7 @@ class Postlist extends Component {
   render() {
     // const nothing='';
     const { posts } = this.props;
-    const { comment } = this.state;
+    const { comment, likes } = this.state;
     const isliked = this.state.isliked;
     const {
       auth: { isloggedin },
@@ -88,6 +91,7 @@ class Postlist extends Component {
     if (posts.length === 0) {
       return <h2 className="login-form">Loading...</h2>;
     }
+    console.log("Likes count:",this.state.likes);
     return (
       <div className="posts-list">
         {isloggedin && <CreatePost />}
@@ -111,23 +115,26 @@ class Postlist extends Component {
               </div>
               {/* const isliked = this.isPostLikedByUser(post); */}
               <div className="post-content">{post.content}</div>
+              <div><p></p></div>
+              
 
               <div className="post-actions">
                 {console.log("isloggedin", isloggedin)}
+                {/* {likes==0 ? : } */}
                 {isloggedin ? (
                   <div
                     className="post-like"
                     onClick={(e) => this.handlelike(e, post)}
                   >
-                    {isliked ? (
+                    {likes==0 ? (
                       <img
-                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                        src="heart.png"
                         alt="like-post"
                         
                       />
                     ) : (
                       <img
-                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                        src="heart.png"
                         alt="likes-icon"
                         
                       />
@@ -135,36 +142,50 @@ class Postlist extends Component {
                     <span>{post.likes.length}</span>
                   </div>
                 ) : (
-                  <div className="post-like">
+                  <div className="post-like ">
                     {isliked ? (
-                      <div>
+                      <div className="no-cursor">
                         {/* <span class="tooltiptext">Tooltip text</span> */}
                         <img
 
-                          src="https://image.flaticon.com/icons/svg/1076/1076984.svg"
+                          src="heart-liked.png"
                           alt="like-post"
                           title="Login to like"
                         />
                       </div>
                     ) : (
-                      <img
-                        src="https://image.flaticon.com/icons/svg/1077/1077035.svg"
+                      <div className="hello">
+                        <img
+                        src="heart.png"
                         alt="likes-icon"
                         title="Login to Like"
                       />
+                      </div>
+                      
                     )}
                     <span>{post.likes.length}</span>
                   </div>
                 )}
 
-                <div className="post-comments-icon">
+                {isloggedin && <div className="post-comments-icon">
                   <img
-                    src="https://image.flaticon.com/icons/svg/1380/1380338.svg"
+                    src="comment.png"
                     alt="comments-icon"
                     title="Login to Comment"
                   />
                   <span>{post.comments.length}</span>
-                </div>
+                </div> }
+
+                
+                {!isloggedin && <div className="post-comments-icon hello">
+                  <img
+                    src="comment.png"
+                    alt="comments-icon"
+                    title="Login to Comment"
+                  />
+                  <span>{post.comments.length}</span>
+                </div> }
+
               </div>
               <div className="post-comment-box">
                 {isloggedin && (
