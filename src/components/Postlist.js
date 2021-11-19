@@ -104,7 +104,7 @@ class Postlist extends Component {
               <div className="post-avatar">
                 <Link to={`/user/${post.user._id}`}>
                   <img
-                    src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+                    src="user.png"
                     alt="user-pic"
                   />
                 </Link>
