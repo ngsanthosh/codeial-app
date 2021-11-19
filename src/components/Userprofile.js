@@ -119,16 +119,16 @@ class Userprofile extends Component {
       <div className="settings">
         <div className="img-container">
           <img
-            src="https://image.flaticon.com/icons/svg/2154/2154651.svg"
+            src="user.png"
             alt="user-dp"
           />
         </div>
         {success && (
-          <div className="alert success-dailog">Friend Added Successfully</div>
+          <div className="alert success-dailog">Friend Added Successfully 🥰</div>
         )}
         {removeFR && (
-          <div className="alert success-dailog">
-            Friend Removed Successfully
+          <div className="alert error-dailog">
+            Friend Removed Successfully 💩
           </div>
         )}
         {error && <div className="alert error-dailog">{error}</div>}

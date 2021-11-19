@@ -13,7 +13,7 @@ class Navbar extends Component {
     this.state = { searchttext: "" };
   }
   logout = () => {
-    document.title="Codeial"
+    document.title = "Codeial";
     localStorage.removeItem("token");
     this.props.dispatch(logout());
   };
@@ -43,16 +43,13 @@ class Navbar extends Component {
             </Link>
           </div>
           <div className="search-container">
-            <img
-              className="search-icon"
-              src="https://image.flaticon.com/icons/svg/483/483356.svg"
-              alt="search-icon"
-            />
+            <img className="search-icon" src="search.png" alt="search-icon"  />
             {console.log(results.length)}
             {isloggedin ? (
               <input placeholder="Search" onChange={this.handleSearch} />
             ) : (
-              <input className="no-cursor"
+              <input
+                className="no-cursor"
                 placeholder="Please Login to Search, Like, Comment, Post feed and more.."
                 // value="Please Login to search..."
                 disabled
@@ -65,10 +62,7 @@ class Navbar extends Component {
                   <ul>
                     <Link to={`/user/${user._id}`}>
                       <li className="search-results-row">
-                        <img
-                          src="user.png"
-                          alt="user-dp"
-                        />
+                        <img src="user.png" alt="user-dp" />
                         <span>{user.name}</span>
                       </li>
                     </Link>
@@ -81,11 +75,7 @@ class Navbar extends Component {
             {isloggedin && (
               <div className="user">
                 <Link to="/settings">
-                  <img
-                    src="user.png"
-                    alt="user-dp"
-                    id="user-dp"
-                  />
+                  <img src="user.png" alt="user-dp" id="user-dp" />
                 </Link>
                 <span>{user.name}</span>
               </div>
@@ -113,9 +103,6 @@ class Navbar extends Component {
     );
   }
 }
-
-
-
 
 const mapStatetoProps = (state) => {
   return {
