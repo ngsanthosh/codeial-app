@@ -264,14 +264,14 @@ nav .nav-links ul li:hover {
   box-sizing: border-box;
   flex-grow: 1;
 }
-.search-container input:focus {
+/* .search-container input:focus {
   outline: none;
-}
+} */
 .search-icon {
   height: 20px;
   position: absolute;
   top: 10px;
-  left: 7px;
+  left: 5px;
 }
 .search-results {
   background: #fff;
@@ -498,6 +498,7 @@ nav .nav-links ul li:hover {
   box-sizing: border-box;
   border-radius: 4px;
 }
+
 .create-post > div {
   padding: 10px;
   border-top: 1px solid #d0d0d0;
