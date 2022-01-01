@@ -86,7 +86,7 @@ class Login extends Component {
             )}
           </div>
           <div className="field">
-            <h3>New user? <Link to="/signup">Register </Link> </h3>
+            <center><h3>New user? <Link to="/signup">Register </Link> </h3></center>
           </div>
         </form>
       </div>
