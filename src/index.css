@@ -449,7 +449,7 @@ nav .nav-links ul li:hover {
   width: 100%;
 }
 
-.field h3 {
+.field h3 a {
   text-decoration: none;
 }
 
