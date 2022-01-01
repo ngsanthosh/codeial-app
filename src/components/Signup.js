@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import { signup, clearerror, startsignup } from "../actions/auth";
 
@@ -13,8 +14,8 @@ class Signup extends Component {
       confirmPassword: " ",
     };
   }
-  componentDidMount(){
-    document.title="Codeial - Signup"
+  componentDidMount() {
+    document.title = "Codeial - Signup";
   }
   componentWillUnmount() {
     this.props.dispatch(clearerror());
@@ -82,12 +83,23 @@ class Signup extends Component {
         </div>
         <div className="field">
           {inprogress ? (
-            <button className="no-cursor" onClick={this.onFormSubmit} disabled={inprogress}>
+            <button
+              className="no-cursor"
+              onClick={this.onFormSubmit}
+              disabled={inprogress}
+            >
               Signing up...
             </button>
           ) : (
             <button onClick={this.onFormSubmit}>Signup</button>
           )}
+        </div>
+        <div className="field">
+          <center>
+            <h3>
+              Already registered? <Link to="/login">Login </Link>{" "}
+            </h3>
+          </center>
         </div>
       </form>
     );
