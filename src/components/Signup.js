@@ -97,7 +97,7 @@ class Signup extends Component {
         <div className="field">
           <center>
             <h3>
-              Already registered? <Link to="/login">Login </Link>{" "}
+              Already registered? <Link to="/login">Login </Link>
             </h3>
           </center>
         </div>
