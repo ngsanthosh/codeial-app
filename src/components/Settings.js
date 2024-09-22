@@ -11,11 +11,12 @@ class Settings extends Component {
       confirmPassword: "",
       editMode: false,
       goback: false,
-    };
+    };  
   }
   componentDidMount() {
     
-    document.title="Codeial - Manage Account"
+    // document.title="Codeial - Manage Account" //This is been deprecated
+    document.title="Manage Your Account right here."
   }
   
   componentWillUnmount() {
